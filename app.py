@@ -355,8 +355,7 @@ def inject_css():
         .sb-av-wrap {
             position: relative; width: 108px; height: 108px; margin: 0 auto 0.7rem;
             border-radius: 50%;
-            background: conic-gradient(from 0deg, #7c3aed, #22d3ee, #6366f1, #7c3aed);
-            animation: spin 6s linear infinite;
+            background: conic-gradient(from 210deg, #7c3aed, #6366f1, #22d3ee, #7c3aed);
             padding: 3px;
         }
         .sb-av {
@@ -364,7 +363,6 @@ def inject_css():
             object-fit: cover; display: block;
             border: 3px solid #0c0f17;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
         .sb-name {
             font-size: 1.18rem; font-weight: 800; text-align: center; color: #fff;
             background: linear-gradient(120deg, #fff, #c7b8ff, var(--color, #7c3aed));
@@ -391,6 +389,13 @@ def inject_css():
             font-size: 0.68rem; letter-spacing: 0.14em; color: var(--muted);
             font-weight: 700; margin: 1.1rem 0 0.35rem; padding-left: 2px;
         }
+
+        /* push contact block to the bottom of the panel */
+        [data-testid="stSidebarUserContent"] { display: flex; flex-direction: column; }
+        [data-testid="stSidebarUserContent"] .block-container {
+            display: flex; flex-direction: column; flex: 1;
+        }
+        .sb-contact { margin-top: auto; padding-top: 1.2rem; }
 
         /* nav pills — restyle the radio */
         [data-testid="stSidebar"] [role="radiogroup"] {
@@ -663,25 +668,20 @@ def sidebar():
             label_visibility="collapsed",
         )
         section = section.split(" ", 1)[-1]
-        st.markdown('<div class="sb-head">CONTACT</div>', unsafe_allow_html=True)
         st.markdown(
-            f'<div class="sb-line">✉ <a href="mailto:{EMAIL}">{EMAIL}</a></div>',
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            f'<div class="sb-line">📍 <a href="{GITHUB}" target="_blank">github.com/Albusxx-01</a></div>',
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            '<div class="sb-socials">'
+            '<div class="sb-contact">'
+            '<div class="sb-head">CONTACT</div>'
+            '<div style="height:1px;background:var(--border);margin:.6rem 0 .9rem"></div>'
+            f'<div class="sb-line">✉ <a href="mailto:{EMAIL}">{EMAIL}</a></div>'
+            f'<div class="sb-line">★ <a href="{GITHUB}" target="_blank">github.com/Albusxx-01</a></div>'
+            '<div class="sb-line" style="margin-top:.7rem">Open to collaborations</div>'
+            '<div class="sb-socials" style="margin-top:.8rem">'
             f'<a class="sb-social" title="GitHub" href="{GITHUB}" target="_blank">★</a>'
             f'<a class="sb-social" title="LinkedIn" href="{LINKEDIN}" target="_blank">in</a>'
             f'<a class="sb-social" title="Email" href="mailto:{EMAIL}">✉</a>'
+            "</div>"
+            '<div class="sb-foot" style="margin-top:1rem">© 2026 · Built with Streamlit ⚡</div>'
             "</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            '<div class="sb-foot">© 2026 · Built with Streamlit ⚡</div>',
             unsafe_allow_html=True,
         )
         return section
