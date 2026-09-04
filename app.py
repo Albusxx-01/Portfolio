@@ -334,12 +334,113 @@ def inject_css():
             box-shadow: 0 4px 16px rgba(124,58,237,0.4);
         }
 
-        /* Sidebar */
+        /* ------------------------- Sidebar ------------------------- */
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #0d1119, #121722);
+            background: linear-gradient(180deg, #0c0f17 0%, #111624 100%);
             border-right: 1px solid var(--border);
+            padding-top: 0.6rem;
         }
-        [data-testid="stSidebar"] .stRadio label { color: var(--muted); }
+        [data-testid="stSidebar"]::before {
+            content: "";
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--cyan), var(--primary));
+            background-size: 200% 100%;
+            animation: barflow 6s linear infinite;
+            margin: -1.2rem -1rem 0.5rem;
+        }
+        @keyframes barflow { to { background-position: 200% 0; } }
+
+        /* profile card */
+        .sb-av-wrap {
+            position: relative; width: 108px; height: 108px; margin: 0 auto 0.7rem;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #7c3aed, #22d3ee, #6366f1, #7c3aed);
+            animation: spin 6s linear infinite;
+            padding: 3px;
+        }
+        .sb-av {
+            border-radius: 50%; width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            border: 3px solid #0c0f17;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .sb-name {
+            font-size: 1.18rem; font-weight: 800; text-align: center; color: #fff;
+            background: linear-gradient(120deg, #fff, #c7b8ff, var(--color, #7c3aed));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .sb-role { text-align: center; color: var(--cyan); font-size: 0.82rem; font-weight: 600; }
+        .sb-status {
+            display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+            margin: 0.6rem auto 0; width: fit-content;
+            color: #a7e8c8; font-size: 0.75rem; font-weight: 600;
+            background: rgba(52,211,153,0.10); border: 1px solid rgba(52,211,153,0.4);
+            border-radius: 999px; padding: 0.22rem 0.75rem;
+        }
+        .sb-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: #34d399;
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+            50%      { box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+        }
+
+        .sb-head {
+            font-size: 0.68rem; letter-spacing: 0.14em; color: var(--muted);
+            font-weight: 700; margin: 1.1rem 0 0.35rem; padding-left: 2px;
+        }
+
+        /* nav pills — restyle the radio */
+        [data-testid="stSidebar"] [role="radiogroup"] {
+            display: flex; flex-direction: column; gap: 0.4rem;
+        }
+        [data-testid="stSidebar"] [role="radiogroup"] label {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.55rem 0.9rem;
+            min-height: 42px;
+            color: var(--muted);
+            font-weight: 600;
+            transition: all .18s ease;
+            display: flex; align-items: center;
+            cursor: pointer;
+        }
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+            border-color: rgba(124,58,237,0.6);
+            color: #fff;
+            transform: translateX(3px);
+        }
+        [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
+            background: linear-gradient(120deg, rgba(124,58,237,0.28), rgba(99,102,241,0.18));
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(124,58,237,0.35);
+        }
+
+        /* mini contact lines */
+        .sb-line { font-size: 0.82rem; color: var(--muted); display: flex; gap: 0.5rem; align-items: center; }
+        .sb-line a { color: var(--muted); text-decoration: none; }
+        .sb-line a:hover { color: var(--cyan); }
+
+        /* socials row */
+        .sb-socials { display: flex; justify-content: center; gap: 0.5rem; }
+        .sb-social {
+            width: 36px; height: 36px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--card); border: 1px solid var(--border);
+            color: var(--muted); font-size: 1rem; text-decoration: none;
+            transition: all .18s ease;
+        }
+        .sb-social:hover {
+            border-color: var(--primary); color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(124,58,237,0.4);
+        }
+
+        .sb-foot { text-align: center; color: var(--muted); font-size: 0.72rem; margin-top: 0.2rem; }
 
         /* Footer */
         .footer {
@@ -545,25 +646,42 @@ def footer():
 def sidebar():
     with st.sidebar:
         st.markdown(
-            '<div style="text-align:center;padding:.4rem 0 1rem">'
-            '<img src="https://avatars.githubusercontent.com/u/150047431?v=4" '
-            'style="border-radius:50%;width:96px;border:3px solid #7c3aed;'
-            'box-shadow:0 0 24px rgba(124,58,237,.5)"/>'
-            '<div style="font-weight:800;font-size:1.15rem;margin-top:.6rem;color:#fff">Satwik Parasar</div>'
-            '<div style="color:#22d3ee;font-size:.85rem">AI/ML Engineer</div>'
+            '<div style="text-align:center;padding:.4rem 0 .2rem">'
+            '<div class="sb-av-wrap">'
+            f'<img class="sb-av" src="{AVATAR_URL}"/>'
+            "</div>"
+            '<div class="sb-name">Satwik Parasar</div>'
+            '<div class="sb-role">◆ AI/ML Engineer &nbsp;·&nbsp; Backend Dev</div>'
+            '<div class="sb-status"><span class="sb-dot"></span>Open to opportunities</div>'
             "</div>",
             unsafe_allow_html=True,
         )
-        st.markdown("---")
+        st.markdown('<div class="sb-head">MENU</div>', unsafe_allow_html=True)
         section = st.radio(
             "Navigate",
-            ["Home", "Projects", "Contact"],
+            ["✨ Home", "🚀 Projects", "📬 Contact"],
             label_visibility="collapsed",
         )
-        st.markdown("---")
+        section = section.split(" ", 1)[-1]
+        st.markdown('<div class="sb-head">CONTACT</div>', unsafe_allow_html=True)
         st.markdown(
-            '<div style="color:#9aa4b8;font-size:.8rem;text-align:center">'
-            '<a href="https://github.com/Albusxx-01" style="color:#7c3aed;text-decoration:none">@Albusxx-01</a></div>',
+            f'<div class="sb-line">✉ <a href="mailto:{EMAIL}">{EMAIL}</a></div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            f'<div class="sb-line">📍 <a href="{GITHUB}" target="_blank">github.com/Albusxx-01</a></div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="sb-socials">'
+            f'<a class="sb-social" title="GitHub" href="{GITHUB}" target="_blank">★</a>'
+            f'<a class="sb-social" title="LinkedIn" href="{LINKEDIN}" target="_blank">in</a>'
+            f'<a class="sb-social" title="Email" href="mailto:{EMAIL}">✉</a>'
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="sb-foot">© 2026 · Built with Streamlit ⚡</div>',
             unsafe_allow_html=True,
         )
         return section
