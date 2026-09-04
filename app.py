@@ -1,5 +1,3 @@
-import os
-
 import streamlit as st
 
 st.set_page_config(
@@ -13,7 +11,6 @@ GITHUB = "https://github.com/Albusxx-01"
 LINKEDIN = "https://www.linkedin.com/in/satwik-parasar-a529b1214/"
 EMAIL = "satwikxofficial@gmail.com"
 AVATAR_URL = "https://avatars.githubusercontent.com/u/150047431?v=4"
-RESUME_PATH = os.path.join("assets", "Satwik_Parasar_Resume.pdf")
 
 # ----------------------------------------------------------------------------
 # Data
@@ -434,55 +431,6 @@ def inject_css():
     )
 
 
-def light_css():
-    st.markdown(
-        """
-        <style>
-        :root {
-            --bg: #f4f6fb;
-            --bg-soft: #eef0f7;
-            --card: #ffffff;
-            --border: #e2e6f0;
-            --text: #1b2233;
-            --muted: #5b6474;
-            --primary: #6d28d9;
-            --accent: #4f46e5;
-            --cyan: #0e7490;
-            --green: #059669;
-        }
-        .stApp {
-            background:
-                radial-gradient(1100px 520px at 85% -10%, rgba(124,58,237,0.10), transparent 60%),
-                radial-gradient(820px 420px at -10% 20%, rgba(34,211,238,0.10), transparent 55%),
-                var(--bg);
-            color: var(--text);
-        }
-        [data-testid="stSidebar"] { background: linear-gradient(180deg, #eef0f7, #e7eaf4); }
-        .sb-av { border: 3px solid #eef0f7; }
-        .hero-name {
-            background: linear-gradient(120deg, #1b2233 0%, #6d28d9 60%, var(--primary) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .sb-name {
-            background: linear-gradient(120deg, #1b2233, #6d28d9);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .badge { background: rgba(109,40,217,0.08); border-color: rgba(109,40,217,0.35); color: #6d28d9; }
-        .proj-name { color: #1b2233; }
-        .featured { background: linear-gradient(160deg, rgba(124,58,237,0.08), var(--card) 45%); }
-        .stat-card, .chip, .proj, .sb-social { box-shadow: 0 3px 14px rgba(30,41,90,0.07); }
-        .social-btn.github { background: linear-gradient(135deg, #e9ecf5, #dfe4f0); }
-        [data-testid="stSidebar"] .stButton > button { color: #3a4155; }
-        [data-testid="stSidebar"] .stButton > button:hover,
-        [data-testid="stSidebar"] button[kind="primary"]:not(:hover) { color: #3a4155; }
-        [data-testid="stSidebar"] .sb-social:hover { color: #6d28d9; }
-        [data-testid="stToggle"] { background: var(--border) !important; }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 # ----------------------------------------------------------------------------
 # Sections
 # ----------------------------------------------------------------------------
@@ -710,26 +658,6 @@ def sidebar():
                     st.session_state.section = name
                     st.rerun()
 
-        if os.path.exists(RESUME_PATH):
-            with open(RESUME_PATH, "rb") as fh:
-                resume_bytes = fh.read()
-            st.markdown('<div class="sb-head">RESUME</div>', unsafe_allow_html=True)
-            st.download_button(
-                "📄 Download CV",
-                data=resume_bytes,
-                file_name="Satwik_Parasar_Resume.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-            )
-        else:
-            st.markdown('<div class="sb-head">RESUME</div>', unsafe_allow_html=True)
-            st.button("📄 Download CV", disabled=True, use_container_width=True, help="CV will be available soon")
-
-        st.markdown('<div class="sb-head">THEME</div>', unsafe_allow_html=True)
-        is_dark = st.session_state.get("theme", "dark") == "dark"
-        light = st.toggle("☀️ Light mode", value=not is_dark, help="Switch between dark and light theme")
-        st.session_state.theme = "light" if light else "dark"
-
         st.markdown(
             '<div class="sb-contact">'
             '<div class="sb-head">CONTACT</div>'
@@ -750,12 +678,9 @@ def sidebar():
 
 
 def main():
-    st.session_state.setdefault("theme", "dark")
     st.session_state.setdefault("section", "Home")
 
     inject_css()
-    if st.session_state.theme == "light":
-        light_css()
 
     section = sidebar()
 
