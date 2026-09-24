@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Satwik Parasar | AI/ML Engineer",
+    page_title="Satwik Parasar Behera | Data Analyst & AI/ML Engineer",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -33,9 +33,16 @@ PROJECTS = {
         },
         {
             "name": "Email/SMS Spam Classifier App",
-            "desc": "Spam detection app powered by a Multinomial Naive Bayes classifier.",
+            "desc": "Spam detection app reaching 97% accuracy — preprocessing, tokenization, TF-IDF vectorization, and multi-model benchmarking, deployed on Streamlit.",
             "tech": ["Python", "Streamlit", "NLP"],
             "url": "https://github.com/Albusxx-01/ML_Email-SMS-Spam-Classifiers-App",
+            "featured": False,
+        },
+        {
+            "name": "NLP Sentiment & Sarcasm Detection",
+            "desc": "Fine-tuned a Transformer model with transfer learning for sentiment and sarcasm classification on real-world text.",
+            "tech": ["Python", "NLP", "Transformers"],
+            "url": "https://github.com/Albusxx-01/NLP_sentiment-detection.",
             "featured": False,
         },
         {
@@ -103,6 +110,13 @@ PROJECTS = {
             "url": "https://github.com/Albusxx-01/DA-Ecommerce",
             "featured": False,
         },
+        {
+            "name": "SPSS Friedman Analysis Automation",
+            "desc": "Automated Friedman non-parametric hypothesis testing with SPSS-style statistical output, streamlining repeated analysis workflows.",
+            "tech": ["Python", "Statistics", "Hypothesis Testing"],
+            "url": "https://github.com/Albusxx-01/SPSS-friedmann-analysis-automation",
+            "featured": False,
+        },
     ],
     "Web Development": [
         {
@@ -117,40 +131,51 @@ PROJECTS = {
 
 SKILLS = [
     ("Python", "🐍"),
-    ("Go", "🐹"),
-    ("Java", "☕"),
-    ("FastAPI", "⚡"),
-    ("Flask", "🍶"),
-    ("Streamlit", "📊"),
-    ("TensorFlow", "🧠"),
-    ("PyTorch", "🔥"),
-    ("Docker", "🐳"),
-    ("MongoDB", "🍃"),
+    ("SQL", "🗄️"),
     ("PostgreSQL", "🐘"),
-    ("Jupyter", "📓"),
-    ("Linux", "🐧"),
+    ("MySQL", "🐬"),
+    ("MongoDB", "🍃"),
+    ("Java", "☕"),
+    ("C", "⚙️"),
+    ("Pandas", "🐼"),
+    ("NumPy", "🔢"),
+    ("Scikit-learn", "🤖"),
+    ("Matplotlib", "📈"),
+    ("Seaborn", "🌊"),
+    ("NLTK", "📝"),
+    ("spaCy", "🌀"),
+    ("TensorFlow", "🧠"),
+    ("Keras", "🧱"),
+    ("PyTorch", "🔥"),
+    ("Tableau", "📊"),
+    ("Power BI", "📉"),
+    ("Flask", "🍶"),
+    ("Streamlit", "✨"),
+    ("Docker", "🐳"),
     ("Git", "🌿"),
+    ("Jupyter", "📓"),
 ]
 
 STATS = [
-    ("14", "Repositories"),
-    ("13", "Projects"),
+    ("17", "Repositories"),
+    ("15", "Projects"),
     ("3", "Core Domains"),
     ("10+", "Data & ML Projects"),
 ]
 
 TAGLINES = [
-    "Building multimodal RAG pipelines",
-    "Exploring Edge AI & Small Language Models",
-    "Painting with PyTorch",
-    "Cooking with FastAPI & Streamlit",
-    "Turning raw data into products",
+    "Turning raw data into actionable insights",
+    "Building predictive ML models",
+    "Fine-tuning Transformers for NLP",
+    "Painting dashboards with Tableau & Power BI",
+    "Automating statistical analysis",
 ]
 
 MARQUEE_ITEMS = [
-    "AI / ML", "Machine Learning", "NLP", "RAG", "Edge AI",
-    "Small Language Models", "Code-Mixed ASR", "Backend Engineering",
-    "Data Analysis", "EDA", "Recommendation Systems", "Spam Detection",
+    "Data Analytics", "Machine Learning", "NLP", "EDA", "Statistics",
+    "Data Visualization", "Tableau", "Power BI", "Hypothesis Testing",
+    "Regression", "Classification", "Recommendation Systems", "Spam Detection",
+    "SQL", "Sarcasm Detection",
 ]
 
 # ----------------------------------------------------------------------------
@@ -421,6 +446,17 @@ def inject_css():
         .footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 2rem 0 0.5rem; border-top: 1px solid var(--border); margin-top: 2rem; }
         .info-line { color: var(--muted); font-size: 0.9rem; }
 
+        /* Experience cards */
+        .exp {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.15rem 1.3rem; margin-bottom: 0.9rem;
+            transition: all .2s ease;
+        }
+        .exp:hover { border-color: rgba(124,58,237,0.6); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.18); }
+        .exp-role { font-size: 1rem; font-weight: 700; color: #fff; }
+        .exp-org { color: var(--cyan); font-size: 0.86rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .exp-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
+
         /* hide streamlit chrome */
         #MainMenu { visibility: hidden; }
         footer { visibility: hidden; }
@@ -441,11 +477,12 @@ def render_hero():
             """
             <div class="hero">
                 <p class="hero-title">Hi, I'm</p>
-                <h1 class="hero-name">Satwik Parasar</h1>
-                <p class="hero-title">✦ AI/ML Engineer & Backend Developer</p>
+                <h1 class="hero-name">Satwik Parasar Behera</h1>
+                <p class="hero-title">✦ Data Analyst & AI/ML Engineer</p>
                 <p class="hero-tag">
-                    B.Tech Computer Science student building intelligent systems — from multimodal RAG pipelines
-                    to code-mixed AI solutions. Currently exploring <b>Edge AI</b>, <b>Small Language Models</b> & <b>Code-Mixed ASR</b>.
+                    B.Tech Computer Science (AIML) student turning raw data into actionable insights —
+                    from statistical analysis and data visualization to predictive ML models and NLP.
+                    Skilled in SQL, Python, and Scikit-learn; experienced in leading technical communities.
                 </p>
                 <div>
                     <a class="social-btn github" href="https://github.com/Albusxx-01" target="_blank">★ GitHub</a>
@@ -483,23 +520,60 @@ def render_about():
     st.markdown('<div class="section-title"><span class="sep">▍</span> About Me</div>', unsafe_allow_html=True)
     st.markdown(
         """
-        I'm an AI/ML engineer passionate about data, machine learning, and backend systems.
-        I love turning raw data into real products — from movie recommendation engines and spam
-        classifiers to large-scale EDA. I write clean, efficient, and scalable code and I'm always
-        building something new.
+        I'm a **Data Analyst and AI/ML Engineer** with a strong foundation in Computer Science.
+        I specialize in Exploratory Data Analysis (EDA), data visualization, statistical analysis,
+        and building predictive machine learning models in Python. I enjoy translating raw data into
+        actionable insights and communicating findings clearly to stakeholders.
 
-        **What I'm focusing on right now:** Edge AI, Small Language Models, and Code-Mixed ASR.
+        Beyond the data, I've managed technical communities, coordinated entrepreneurship initiatives,
+        and interned on an Indic code-mix NLP vocabulary pipeline — always building something new.
         """,
         unsafe_allow_html=True,
     )
     st.markdown(
         "**Core strengths:** " + " ".join(
             f'<span class="badge">{t}</span>' for t in
-            ["Artificial Intelligence", "Machine Learning", "Data Analysis",
-             "Multimodal RAG", "Backend Engineering", "Problem Solving"]
+            ["Data Analytics", "Machine Learning", "Statistical Analysis",
+             "Data Visualization", "NLP", "Problem Solving", "Community Leadership"]
         ),
         unsafe_allow_html=True,
     )
+
+
+EXPERIENCE = [
+    {
+        "role": "Technical Intern",
+        "org": "Coremantle · 2025",
+        "desc": ("Automated the Indic code-mix vocabulary pipeline — built a three-step toolchain "
+                 "(build_vocab, merge_vocab, build_conflicts) extracting script-filtered words with phonetic "
+                 "short codes, incremental per-language merging, and conflict/alias generation. Rebirthed the "
+                 "Telugu conflict dataset (+100K lines) and hardened correctness with SHA-256-based merging."),
+    },
+    {
+        "role": "Community Manager",
+        "org": "Srujanee · 1 Year Experience",
+        "desc": ("Built and managed communities to grow engagement and membership; planned and delivered "
+                 "community-driven events and marketing campaigns, strengthening member outreach and "
+                 "community relations."),
+    },
+    {
+        "role": "Campus Ambassador / Coordinator",
+        "org": "Entrepreneurship Cell, SUIIT · 2024",
+        "desc": ("Recruited and engaged students for entrepreneurship initiatives; coordinated events and "
+                 "served as the primary liaison between the cell and campus communities."),
+    },
+]
+
+
+def render_experience():
+    st.markdown('<div class="section-title"><span class="sep">▍</span> Experience & Leadership</div>', unsafe_allow_html=True)
+    for exp in EXPERIENCE:
+        st.markdown(
+            f'<div class="exp"><div class="exp-role">{exp["role"]}</div>'
+            f'<div class="exp-org">{exp["org"]}</div>'
+            f'<div class="exp-desc">{exp["desc"]}</div></div>',
+            unsafe_allow_html=True,
+        )
 
 
 def render_skills():
@@ -604,7 +678,7 @@ def render_contact():
 
 
 def footer():
-    st.markdown('<div class="footer">Designed & built with ⚡ Streamlit · © 2026 Satwik Parasar</div>', unsafe_allow_html=True)
+    st.markdown('<div class="footer">Designed & built with ⚡ Streamlit · © 2026 Satwik Parasar Behera</div>', unsafe_allow_html=True)
 
 
 def render_scroll_top():
@@ -636,8 +710,8 @@ def sidebar():
             '<div class="sb-av-wrap">'
             f'<img class="sb-av" src="{AVATAR_URL}"/>'
             "</div>"
-            '<div class="sb-name">Satwik Parasar</div>'
-            '<div class="sb-role">◆ AI/ML Engineer &nbsp;·&nbsp; Backend Dev</div>'
+            '<div class="sb-name">Satwik Parasar Behera</div>'
+            '<div class="sb-role">◆ Data Analyst &nbsp;·&nbsp; AI/ML Engineer</div>'
             '<div class="sb-status"><span class="sb-dot"></span>Open to opportunities</div>'
             "</div>",
             unsafe_allow_html=True,
@@ -691,6 +765,8 @@ def main():
         render_stats()
         st.markdown("---")
         render_about()
+        st.markdown("---")
+        render_experience()
         st.markdown("---")
         render_skills()
         st.markdown("---")
