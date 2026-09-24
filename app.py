@@ -115,7 +115,8 @@ PROJECTS = {
             "desc": "Automated Friedman non-parametric hypothesis testing with SPSS-style statistical output, streamlining repeated analysis workflows.",
             "tech": ["Python", "Statistics", "Hypothesis Testing"],
             "url": "https://github.com/Albusxx-01/SPSS-friedmann-analysis-automation",
-            "featured": False,
+            "featured": True,
+            "new": True,
         },
     ],
     "Web Development": [
@@ -297,6 +298,7 @@ def inject_css():
         .proj-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.5; flex: 1; }
         .proj-tech { margin-top: 0.7rem; }
         .proj-star { color: #fbbf24; font-size: 0.8rem; font-weight: 700; }
+        .proj-new { color: #34d399; font-size: 0.8rem; font-weight: 700; }
         .link-btn {
             display: inline-block; margin-top: 0.9rem;
             color: var(--cyan); font-weight: 600; font-size: 0.85rem;
@@ -589,6 +591,7 @@ def render_skills():
 def card_for(proj):
     tech = " ".join(f'<span class="badge">{t}</span>' for t in proj["tech"])
     top = '<div class="proj-star">★ FEATURED</div>' if proj.get("featured") else ""
+    top += '<div class="proj-new">🆕 Newly Added</div>' if proj.get("new") else ""
     return (
         '<div class="proj {featured}">'
         f'<div class="proj-name">{proj["name"]}</div>'
@@ -602,7 +605,7 @@ def card_for(proj):
 
 def render_projects():
     st.markdown('<div class="section-title"><span class="sep">▍</span> Projects</div>', unsafe_allow_html=True)
-    cats = list(PROJECTS.keys()) + ["All"]
+    cats = ["All"] + list(PROJECTS.keys())
     c1, c2 = st.columns([2.4, 3], gap="medium", vertical_alignment="bottom")
     with c1:
         selected = st.selectbox("Category:", cats, label_visibility="collapsed")
